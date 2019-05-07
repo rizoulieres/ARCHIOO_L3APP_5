@@ -20,13 +20,10 @@ public class LigneDeCommande implements IHM  {
 		
 		System.out.print("Quelle opération souhaitez vous faire (Indiquez le symbole) :");
 		String op = sc.next();
-		System.out.print("Nombre 1 :");
-		float a = sc.nextFloat();
-		System.out.print("Nombre 2 :");
-		float b = sc.nextFloat();
+		
 		
 		try {
-			float result = calculette.calculer(a, b, op);
+			float result = calculette.calculer(op);
 			System.out.print("Résulat :");
 			System.out.print(result);
 			
