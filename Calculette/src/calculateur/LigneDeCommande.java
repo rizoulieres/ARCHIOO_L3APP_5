@@ -31,6 +31,7 @@ public class LigneDeCommande implements IHM  {
 			System.out.print(result);
 			
 		}catch (DivisionException | OperationException e) {
+
 			e.getMessage();
 		}
 		
