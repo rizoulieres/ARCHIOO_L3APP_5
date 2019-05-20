@@ -5,21 +5,38 @@ import java.util.Scanner;
 
 import calculateur.Exception.DivisionException;
 import calculateur.Exception.OperationException;
+import properties.AppProperties;
 
 public class LigneDeCommande implements IHM  {
 
 	private Scanner sc;
-
+	private AppProperties texte;
+	
+	public LigneDeCommande() {
+		texte = new AppProperties("fr");
+		DivisionException.setAppProperties(texte);
+		OperationException.setAppProperties(texte);
+		CalculetteConf.setAppProperties(texte);
+		
+	}
+	
+	public LigneDeCommande(AppProperties app) {
+		texte = app;
+		DivisionException.setAppProperties(texte);
+		OperationException.setAppProperties(texte);
+		CalculetteConf.setAppProperties(texte);
+	}
+	
 	@Override
 	public void lancer() {
-		System.out.println("Bienvenue sur la calculette en ligne de commande");
+		System.out.println(texte.getProperties("welcome_message"));
 		
 		CalculetteConf.init();
 		Calculette calculette = new Calculette();
 
 		sc = new Scanner(System.in);
 		
-		System.out.print("Quelle opération souhaitez vous faire (Indiquez le symbole) :");
+		System.out.print(texte.getProperties("operation_message"));
 		String op = sc.next();
 		
 		try {
@@ -31,17 +48,17 @@ public class LigneDeCommande implements IHM  {
 		
 		
 		try {
-			System.out.print("Nombre 1 :");
+			System.out.print(texte.getProperties("first_digit"));
     		float a = sc.nextFloat();
-    		System.out.print("Nombre 2 :");
+    		System.out.print(texte.getProperties("second_digit"));
     		float b = sc.nextFloat();
 			float result = calculette.calculer(op,a,b);
-			System.out.print("Résulat :");
+			System.out.print(texte.getProperties("result_message"));
 			System.out.print(result);
 			
 		}catch (OperationException | InputMismatchException | DivisionException e) {
 			if(e.getClass() == InputMismatchException.class) {
-				System.out.println("Erreur | Format attendu : float ex : 2,6");
+				System.err.println(texte.getProperties("exception_number_message"));
 			}
 			e.getMessage();
 		}

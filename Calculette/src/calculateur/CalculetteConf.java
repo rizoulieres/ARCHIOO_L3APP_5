@@ -4,15 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import calculateur.Exception.OperationException;
+import properties.AppProperties;
 
 public class CalculetteConf {
 	
 	private static Map<String, Operation> operations;
+	private static AppProperties appS;
+	
+	public static void setAppProperties(AppProperties app) {
+		appS = app;
+	}
 
 
 	public static boolean ajouterOperation(String symbole, Operation op) {
 		if((operations.get(symbole) != null)){
-			System.err.println("Ce couple Symbole / Opération existe déjà");
+			System.err.println(appS.getProperties("exception_couple_message"));
 			return false;
 		}else {
 			operations.put(symbole, op);
