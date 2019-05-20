@@ -10,8 +10,15 @@ public class CalculetteConf {
 	private static Map<String, Operation> operations;
 
 
-	public static void ajouterOperation(String symbole, Operation op) {
-		operations.put(symbole, op); 
+	public static boolean ajouterOperation(String symbole, Operation op) {
+		if((operations.get(symbole) != null)){
+			System.err.println("Ce couple Symbole / Opération existe déjà");
+			return false;
+		}else {
+			operations.put(symbole, op);
+			return true;
+		}
+		 
 	}
 	
 	public static Operation getOperation(String symbole) throws OperationException {
